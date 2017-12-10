@@ -57,7 +57,7 @@ function ghGetFiles(path) {
 
 // Requires all libraries that are loaded after the page is loaded
 function requireRemaining() {
-  require(['https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js', 'lib/katex/autoload.js', 'lib/prefixfree/prefixfree.js', 'https://buttons.github.io/buttons.js'], function(_katex, renderMathInElement) {
+  require(['https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js', 'lib/katex/autoload.js', 'lib/prefixfree/prefixfree.js'], function(_katex, renderMathInElement) {
     // Setup KaTeX
     // HACK: Set katex to _katex to define katex
     katex = _katex;
