@@ -53,7 +53,8 @@
             <div id="header-buttons">
                <a class="button" href="?Home">Home</a>
                {{#enableEditing}}
-                  <a class="button" href="{{#editIsNew}}https://github.com/{{repo}}/new/master/pages{{^editIsNew}}https://github.com/{{repo}}/edit/master/pages/{{title}}.md{{/editIsNew}}">Edit</a>
+                  <a class="button" href="{{#editIsNew}}https://github.com/{{repo}}/new/master/pages{{/editIsNew}}
+                                          {{^editIsNew}}https://github.com/{{repo}}/edit/master/pages/{{title}}.md{{/editIsNew}}">Edit</a>
                {{/enableEditing}}
                <a class="button" href="https://github.com/{{repo}}/new/master/pages">New</a>
             </div>
