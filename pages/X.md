@@ -1,1 +1,1 @@
-The **X Window System** is a windowing system for bitmap displays, common on UNIX-like computer operating systems. If you are running a desktop version of Linux on one of your computers, you are mostlikely using [Xorg](?Xorg), a server for the X Windowing System.
+The **X Window System** is a windowing system for bitmap displays, common on UNIX-like computer operating systems. If you are running a desktop version of Linux on one of your computers, you are most likely using [Xorg](?Xorg), an implementation of the X Windowing System. 
