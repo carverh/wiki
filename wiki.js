@@ -175,7 +175,7 @@ var specialPages = {
       */
 
       jget('FILES', function(data) {
-        var afiles = data.split('\n');
+        var afiles = data.split('\n').shift();
         var files = [];
         afiles.forEach(function(file) {
           if (RegExp(t.toLowerCase()).test(file.toLowerCase())) {
@@ -184,7 +184,8 @@ var specialPages = {
         });
         sresults.innerHTML = Mustache.render(document.getElementById('tp-results').innerHTML, {
           query: t,
-          results: files
+          results: files,
+          updated: new Date(data.split('\n')[0].format("dd.mm.yyyy hh:MM:ss"));
         });
       });
     }
