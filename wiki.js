@@ -114,6 +114,8 @@ var specialPages = {
       
       // Search page
       domUpdateContent(Mustache.render(document.getElementById('tp-search').innerHTML));
+      updatePage();
+      
       var sform = document.getElementById('sform');
       var ssubmit = document.getElementById('ssubmit');
       var squery = document.getElementById('squery');
@@ -161,7 +163,6 @@ var specialPages = {
           });
         });
       }
-      updatePage();
       requireRemaining();
     });
   },
