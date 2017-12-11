@@ -168,46 +168,48 @@ var specialPages = {
   }
 };
 
-// Initializing Message
-console.log('Initializing...');
+window.addEventListener("load", function() {
+  // Initializing Message
+  console.log('Initializing...');
 
-jget('CONFIG', function(data) {
-  // Load config
-  data.split('\n').forEach(function(l) {
-    var kv = l.split('=');
-    config[kv[0]] = kv[1];
-  });
-
-  // Get wiki title
-  var ptitle;
-  if (window.location.href.split('?').length > 1) {
-    ptitle = window.location.href.split('?')[1].split('#')[0];
-  }
-  if (!ptitle) {
-    ptitle = config.homepage;
-  }
-
-  // Special page handling
-  if (ptitle.startsWith('Special/')) {
-    specialPages[ptitle.split('Special/')[1]]();
-  } else {
-    // Load wiki page
-    jget('pages/'+ptitle+'.md', function(pbody) {
-      // Convert the markdown to HTML
-      var pbodym = marked(pbody);
-
-      // Fill slots
-      domUpdateTitle(ptitle);
-      domUpdateContent(pbodym);
-
-      // Render page
-      updatePage();
-
-      // Require the rest of the libraries
-      requireRemaining();
-
-      // Log success message to console
-      console.log("Done loading wiki page '"+ptitle+"'.");
+  jget('CONFIG', function(data) {
+    // Load config
+    data.split('\n').forEach(function(l) {
+      var kv = l.split('=');
+      config[kv[0]] = kv[1];
     });
-  }
+
+    // Get wiki title
+    var ptitle;
+    if (window.location.href.split('?').length > 1) {
+      ptitle = window.location.href.split('?')[1].split('#')[0];
+    }
+    if (!ptitle) {
+      ptitle = config.homepage;
+    }
+
+    // Special page handling
+    if (ptitle.startsWith('Special/')) {
+      specialPages[ptitle.split('Special/')[1]]();
+    } else {
+      // Load wiki page
+      jget('pages/'+ptitle+'.md', function(pbody) {
+        // Convert the markdown to HTML
+        var pbodym = marked(pbody);
+
+        // Fill slots
+        domUpdateTitle(ptitle);
+        domUpdateContent(pbodym);
+
+        // Render page
+        updatePage();
+
+        // Require the rest of the libraries
+        requireRemaining();
+
+        // Log success message to console
+        console.log("Done loading wiki page '"+ptitle+"'.");
+      });
+    }
+  });
 });
