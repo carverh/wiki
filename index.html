@@ -52,12 +52,16 @@
          <header>
             <h1>{{title}}</h1>
             <div id="header-buttons">
-               <a class="button" href="?Home">Home</a>
+               <a class="button" href="?Home"><span class="fa fa-home" aria-hidden="true"></span></a>
                {{#enableEditing}}
                   <a class="button" href="{{#editIsNew}}https://github.com/{{repo}}/new/master/pages/{{title}}.md{{/editIsNew}}
-                                          {{^editIsNew}}https://github.com/{{repo}}/edit/master/pages/{{title}}.md{{/editIsNew}}">Edit</a>
+                                          {{^editIsNew}}https://github.com/{{repo}}/edit/master/pages/{{title}}.md{{/editIsNew}}">
+                     <span class="fa fa-pencil" aria-hidden="true"></span>
+               </a>
                {{/enableEditing}}
-               <a class="button" href="https://github.com/{{repo}}/new/master/pages">New</a>
+               <a class="button" href="https://github.com/{{repo}}/new/master/pages">
+                  <span class="fa fa-plus" aria-hidden="true"></span>
+               </a>
             </div>
             <hr>
          </header>
