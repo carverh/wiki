@@ -83,13 +83,13 @@ function requireRemaining() {
 
 function domUpdateTitle(title) {
   document.querySelectorAll('[data-bind="title"]').forEach(function(i){
-    i.innerHTML = title;
+    i.innerText = title;
   });
 }
 
 function domUpdateContent(content) {
   document.querySelectorAll('[data-bind="content"]').forEach(function(i){
-    i.innerText = content;
+    i.innerHTML = content;
   });
 }
 
