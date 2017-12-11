@@ -76,17 +76,27 @@ function requireRemaining() {
   require(['https://hypothes.is/embed.js']);
 }
 
+function domUpdateTitle(title) {
+  document.querySelectorAll('[data-bind="title"]').forEach(function (i) {
+    i.innerHTML = title;
+  });
+}
+
+function domUpdateContent(content) {
+  document.querySelectorAll('[data-bind="content"]').forEach(function (i) {
+    i.innerText = content;
+  });
+}
+
 // Special page handlers
 var specialPages = {
   Search: function() {
     require(['lib/mustache/mustache.js'], function(Mustache) {
       var t = window.location.hash.slice(1);
-      var cel = document.getElementById('content');
-      var cet = document.getElementById('title');
-      cet.innerText = 'Special/Search';
+      domUpdateTitle('Special/Search');
       
       // Search page
-      cel.innerHTML = Mustache.render(document.getElementById('tp-search').innerHTML);
+      domUpdateContent(Mustache.render(document.getElementById('tp-search').innerHTML));
       var sform = document.getElementById('sform');
       var ssubmit = document.getElementById('ssubmit');
       var squery = document.getElementById('squery');
@@ -139,14 +149,12 @@ var specialPages = {
   },
   Listing: function() {
     require(['lib/mustache/mustache.js'], function(Mustache) {
-      var cel = document.getElementById('content');
-      var cet = document.getElementById('title');
-      cet.innerText = 'Special/Listing';
+      domUpdateTitle('Special/Listing');
       jget('FILES', function(data) {
         var files = data.split('\n');
-        cel.innerHTML = Mustache.render(document.getElementById('tp-listing').innerHTML, {
+        domUpdateContent(Mustache.render(document.getElementById('tp-listing').innerHTML, {
           results: files
-        }); 
+        })); 
       });
     });
     requireRemaining();
@@ -186,19 +194,10 @@ jget('CONFIG', function(data) {
         document.getElementById('title').innerHTML = ptitle;
         document.getElementById('content').innerHTML = pbodym;
 
-        // Setup Bindings
-        document.querySelectorAll('[data-bind="page markdown"]').forEach(function (i) {
-          i.innerHTML = pbody;
-        });
+        // Fill slots
+        domUpdateTitle(ptitle);
+        domUpdateContent(pbodym);
 
-        document.querySelectorAll('[data-bind="page html"]').forEach(function (i) {
-          i.innerHTML = pbodym;
-        });
-
-        document.querySelectorAll('[data-bind="title"]').forEach(function (i) {
-          i.innerText = ptitle;
-        });
-        
         // Require the rest of the libraries
         requireRemaining();
 
