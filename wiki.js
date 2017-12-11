@@ -24,9 +24,10 @@ var pagedata = {
   author: ""
 }
 
+// Require Mustache
 require(["lib/mustache/mustache.js"], function(Mustache) {
   window.Mustache = Mustache;
-}
+});
 
 // AJAX - Get XMLHTTP object
 function jobj() {
