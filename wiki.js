@@ -119,7 +119,7 @@ var specialPages = {
   Templates: function() {
     domUpdateTitle('Special/Templates');
     domUpdateContent(Mustache.render(document.getElementById('tp-templatelisting').innerHTML, {
-      templates: Object.entries(templates)
+      templates: Object.keys(templates)
     }));
     updatePage();
     requireRemaining();
