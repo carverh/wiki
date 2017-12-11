@@ -1,4 +1,4 @@
-**Java** is a [Bytecode](?Bytecode) interpreted [ObjectOriented](?ObjectOriented) programming language.
+**Java** is a [Bytecode](?Bytecode) interpreted, [ObjectOriented](?ObjectOriented) programming language.
 
 ## Examples
 ### Hello World
