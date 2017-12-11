@@ -37,6 +37,22 @@
          {{/results}}
          </ul>
       </template>
+      
+      <template id="tp-page">
+         <header>
+            <h1>{{title}}</h1>
+            <div class="heading-right">
+               <a class="btn" href="https://github.com/{{repo}}/edit/master/pages/{{title}}.md">Edit</a>
+            </div>
+            <hr>
+         </header>
+         <main>
+            {{content}}
+         </main>
+         <footer>
+            <p>Copyright &copy; 2017 {{author}}</p>
+         </footer>
+      </template>
    </head>
    <body>
       <!--
@@ -51,32 +67,13 @@
                                               o888o                                                                                                                                                                                               
          -->
       <article id="layout" aria-label="Wiki Article" aria-role="article">
-         <header aria-label="Page Header">
-            <h1 aria-label="Page Title" aria-role="heading" id="title">
-               <slot data-bind="title"></slot>
-            </h1>
-            <hr>
-         </header>
-         <main id="content" aria-role="main">
-            <slot data-bind="content"></slot>
-            <p class="nojs">
-               Content should load here in a second.
-               If it doesn't, refresh the page and check the URL.
-               If the page still wont work enable Javascript and update your browser.
-               If you tried that <a href="https://github.com/carverh/wiki/issues/new">create an issue on GitHub</a>
-               with information like the browser you are using and what page you are trying to access.
-          ` </p>
-         </main>
-         <footer aria-label="Page Footer">
-            <hr>
-            <p id="copyright" aria-label="Copyright Notice">Copyright &copy; 2017 Carver Harrison</p>
-            <div>
-               <a class="github-button" href="https://github.com/carverh/wiki/fork" data-icon="octicon-repo-forked" aria-label="Fork carverh/wiki on GitHub">Fork</a>
-               <a class="github-button" href="https://github.com/carverh/wiki/subscription" data-icon="octicon-eye" aria-label="Watch carverh/wiki on GitHub">Watch</a>
-               <a class="github-button" href="https://github.com/carverh/wiki" data-icon="octicon-star" aria-label="Star carverh/wiki on GitHub">Star</a>
-               <a class="github-button" href="https://github.com/carverh/wiki/issues" data-icon="octicon-issue-opened" aria-label="Issue carverh/wiki on GitHub">Issue</a>
-            </div>
-         </footer>
+         <p>
+            Content should load here in a second.
+            If it doesn't, refresh the page and check the URL.
+            If the page still wont work enable Javascript and update your browser.
+            If you tried that <a href="https://github.com/carverh/wiki/issues/new">create an issue on GitHub</a>
+            with information like the browser you are using and what page you are trying to access.
+         </p>
       </article>
    </body>
 </html>
