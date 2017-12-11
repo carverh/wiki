@@ -225,7 +225,7 @@ window.addEventListener("load", function() {
         console.log("Done loading wiki page '"+ptitle+"'.");
       }, function() {
         // Not Found
-        domUpdateContent(Mustache(document.getElementById("tp-notfound").innerHTML, pagedata));
+        domUpdateContent(Mustache.render(document.getElementById("tp-notfound").innerHTML, pagedata));
         updatePage();
       });
     }
