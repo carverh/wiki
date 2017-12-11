@@ -21,7 +21,8 @@ var config = {};
 var pagedata = {
   title: "",
   content: "",
-  author: ""
+  author: "",
+  enableEditing: true
 }
 
 // AJAX - Get XMLHTTP object
@@ -89,6 +90,10 @@ function domUpdateContent(content) {
 
 function domUpdateAuthor(author) {
   pagedata.author = author;
+}
+
+function disableEditing() {
+  pagedata.enableEditing = false;
 }
 
 function updatePage() {
@@ -194,6 +199,7 @@ window.addEventListener("load", function() {
 
     // Special page handling
     if (ptitle.startsWith('Special/')) {
+      disableEditing();
       specialPages[ptitle.split('Special/')[1]]();
     } else {
       // Load wiki page
