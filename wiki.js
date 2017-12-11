@@ -116,6 +116,14 @@ function updatePage() {
 
 // Special page handlers
 var specialPages = {
+  Templates: function() {
+    domUpdateTitle('Special/Templates');
+    domUpdateContent(Mustache.render(document.getElementById('tp-templatelisting').innerHTML, {
+      templates: templates
+    }));
+    updatePage();
+    requireRemaining();
+  },
   Search: function() {
     var t = window.location.hash.slice(1);
     domUpdateTitle('Special/Search');
