@@ -114,6 +114,17 @@ function updatePage() {
   });
 }
 
+function pageNotFound() {
+  domUpdateContent(Mustache.render(document.getElementById("tp-notfound").innerHTML, pagedata));
+  updatePage();
+}
+
+function pageNotFoundSpecial() {
+  pagedata.editIsNew = true;
+  domUpdateContent(Mustache.render(document.getElementById("tp-notfound").innerHTML, pagedata));
+  updatePage();
+}
+
 // Special page handlers
 var specialPages = {
   Templates: function() {
@@ -221,7 +232,11 @@ window.addEventListener("load", function() {
     // Special page handling
     if (ptitle.startsWith('Special/')) {
       disableEditing();
-      specialPages[ptitle.split('Special/')[1]]();
+      if (Object.keys(specialPages).includes(ptitle.split('Special/')[1])) {
+        specialPages[ptitle.split('Special/')[1]]();
+      } else {
+        pageNotFoundSpecial();
+      }
     } else {
       // Fill title slot
       domUpdateTitle(ptitle);
@@ -244,9 +259,7 @@ window.addEventListener("load", function() {
         console.log("Done loading wiki page '"+ptitle+"'.");
       }, function() {
         // Not Found
-        pagedata.editIsNew = true;
-        domUpdateContent(Mustache.render(document.getElementById("tp-notfound").innerHTML, pagedata));
-        updatePage();
+        pageNotFound();
       });
     }
   });
