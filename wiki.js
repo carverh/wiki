@@ -215,7 +215,7 @@ jget('CONFIG', function(data) {
         domUpdateContent(pbodym);
 
         // Render page
-        updatePage
+        updatePage();
         
         // Require the rest of the libraries
         requireRemaining();
