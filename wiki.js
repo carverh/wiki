@@ -101,7 +101,7 @@ function domUpdateAuthor(author) {
 
 function updatePage() {
   require(['lib/mustache/mustache.js'], function(Mustache) {
-    document.getElementById("layout").innerHTML = Mustache.render(document.getElementById("tp-page").innerHTML));
+    document.getElementById("layout").innerHTML = Mustache.render(document.getElementById("tp-page").innerHTML);
   });
 }
 
