@@ -8,7 +8,7 @@
 */
 
 // Remove the "Enable Javascript" message
-document.getElementsByClassName('nojs').forEach(function(i) {
+document.querySelectorAll('.nojs').forEach(function(i) {
   i.outerHTML = '';
 });
 
