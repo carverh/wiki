@@ -128,7 +128,6 @@ function pageNotFoundSpecial() {
 // Special page handlers
 var specialPages = {
   Templates: function() {
-    domUpdateTitle('Special/Templates');
     domUpdateContent(Mustache.render(document.getElementById('tp-templatelisting').innerHTML, {
       templates: Object.keys(templates)
     }));
@@ -137,7 +136,6 @@ var specialPages = {
   },
   Search: function() {
     var t = window.location.hash.slice(1);
-    domUpdateTitle('Special/Search');
 
     // Search page
     domUpdateContent(Mustache.render(document.getElementById('tp-search').innerHTML));
@@ -193,7 +191,6 @@ var specialPages = {
     requireRemaining();
   },
   Listing: function() {
-    domUpdateTitle('Special/Listing');
     jget('FILES', function(data) {
       var files = data.split('\n');
       domUpdateContent(Mustache.render(document.getElementById('tp-listing').innerHTML, {
@@ -232,6 +229,7 @@ window.addEventListener("load", function() {
     // Special page handling
     if (ptitle.startsWith('Special/')) {
       disableEditing();
+      domUpdateTitle(ptitle);
       if (Object.keys(specialPages).includes(ptitle.split('Special/')[1])) {
         specialPages[ptitle.split('Special/')[1]]();
       } else {
