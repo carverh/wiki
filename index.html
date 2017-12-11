@@ -78,6 +78,16 @@
             </div>
          </footer>
       </template>
+      
+      <template id="tp-templatelisting">
+         <hr>
+         <p aria-label="Description">Found <strong>{{templates.length}}</strong> templates.</p>
+         <ul aria-label="Template Listing">
+         {{#templates}}
+            <li><a href="?/Special/Template#{{.}}">{{.}}</a></li>
+         {{/temples}}
+         </ul>
+      </template>
    </head>
    <body>
       <!--
