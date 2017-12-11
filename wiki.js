@@ -18,6 +18,12 @@ var katex;
 // Variables
 var config = {};
 
+var pagedata = {
+  title: "",
+  content: "",
+  author: ""
+}
+
 // AJAX - Get XMLHTTP object
 function jobj() {
   if (window.XMLHttpRequest) {
@@ -82,14 +88,20 @@ function requireRemaining() {
 }
 
 function domUpdateTitle(title) {
-  document.querySelectorAll('[data-bind="title"]').forEach(function(i){
-    i.innerText = title;
-  });
+  pagedata.title = title;
 }
 
 function domUpdateContent(content) {
-  document.querySelectorAll('[data-bind="content"]').forEach(function(i){
-    i.innerHTML = content;
+  pagedata.content = content;
+}
+
+function domUpdateAuthor(author) {
+  pagedata.author = author;
+}
+
+function updatePage() {
+  require(['lib/mustache/mustache.js'], function(Mustache) {
+    document.getElementById("layout").innerHTML = Mustache.render(document.getElementById("tp-page").innerHTML));
   });
 }
 
@@ -149,6 +161,7 @@ var specialPages = {
           });
         });
       }
+      updatePage();
       requireRemaining();
     });
   },
@@ -162,6 +175,7 @@ var specialPages = {
         })); 
       });
     });
+    updatePage();
     requireRemaining();
   }
 };
@@ -195,14 +209,13 @@ jget('CONFIG', function(data) {
         // Convert the markdown to HTML
         var pbodym = marked(pbody);
 
-        // Insert content into the DOM
-        document.getElementById('title').innerHTML = ptitle;
-        document.getElementById('content').innerHTML = pbodym;
-
         // Fill slots
         domUpdateTitle(ptitle);
         domUpdateContent(pbodym);
 
+        // Render page
+        updatePage
+        
         // Require the rest of the libraries
         requireRemaining();
 
