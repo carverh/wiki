@@ -37,7 +37,7 @@ function jobj() {
 }
 
 // AJAX - HTTP GET
-function jget(url, cb) {
+function jget(url, cb, errcb) {
   var xhttp = jobj();
   xhttp.open('GET', url, true);
   xhttp.send();
@@ -45,8 +45,9 @@ function jget(url, cb) {
     if (this.readyState == 4 && this.status == 200) {
       cb(this.responseText);
     }
-    else if (this.readyState == 4 && this.status == 200) {
+    else if (this.readyState == 4 && this.status == 404) {
       console.error("AJAX Error: Could not GET '"+url+"'.");
+      errcb();
     }
   };
 }
@@ -203,13 +204,15 @@ window.addEventListener("load", function() {
       disableEditing();
       specialPages[ptitle.split('Special/')[1]]();
     } else {
+      // Fill title slot
+      domUpdateTitle(ptitle);
+      
       // Load wiki page
       jget('pages/'+ptitle+'.md', function(pbody) {
         // Convert the markdown to HTML
         var pbodym = marked(pbody);
 
-        // Fill slots
-        domUpdateTitle(ptitle);
+        // Fill content slot
         domUpdateContent(pbodym);
 
         // Render page
@@ -220,6 +223,10 @@ window.addEventListener("load", function() {
 
         // Log success message to console
         console.log("Done loading wiki page '"+ptitle+"'.");
+      }, function() {
+        // Not Found
+        domUpdateContent(Mustache(document.getElementById("tp-notfound").innerHTML, pagedata));
+        updatePage();
       });
     }
   });
