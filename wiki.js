@@ -24,6 +24,10 @@ var pagedata = {
   author: ""
 }
 
+require(["lib/mustache/mustache.js"], function(Mustache) {
+  window.Mustache = Mustache;
+}
+
 // AJAX - Get XMLHTTP object
 function jobj() {
   if (window.XMLHttpRequest) {
@@ -100,82 +104,76 @@ function domUpdateAuthor(author) {
 }
 
 function updatePage() {
-  require(['lib/mustache/mustache.js'], function(Mustache) {
-    document.getElementById('layout').innerHTML = Mustache.render(document.getElementById('tp-page').innerHTML, pagedata);
-    console.log('Page updated')
-  });
+  document.getElementById('layout').innerHTML = Mustache.render(document.getElementById('tp-page').innerHTML, pagedata);
+  console.log('Page updated')
 }
 
 // Special page handlers
 var specialPages = {
   Search: function() {
-    require(['lib/mustache/mustache.js'], function(Mustache) {
-      var t = window.location.hash.slice(1);
-      domUpdateTitle('Special/Search');
-      
-      // Search page
-      domUpdateContent(Mustache.render(document.getElementById('tp-search').innerHTML));
-      updatePage();
-      
-      var sform = document.getElementById('sform');
-      var ssubmit = document.getElementById('ssubmit');
-      var squery = document.getElementById('squery');
-      var sresults = document.getElementById('sresults');
-      
-      // Update the search box's value
-      if (t != '') squery.value = t;
-      
-      // Submition handler
-      function handleSubmit(ev) {
-        window.location.replace('?Special/Search#'+squery.value);
-        window.location.reload();
-        ev.preventDefault();
-        return false;
-      }
-      
-      // Handlers
-      sform.addEventListener('submit', handleSubmit, false);
-      ssubmit.addEventListener('click', handleSubmit, false);
-      
-      if (t != '') {
-        // Results page
-        /*
-        jget('https://api.github.com/repos/carverh/wiki/contents/pages', function(data) {
-          var dato = JSON.parse(data);
-          var rfiles = ghGetFiles('/');
-          cel.innerHTML = Mustache.render(document.getElementById('tp-results').innerHTML, {
-            query: rquery,
-            results: rfiles
-          });
-        });
-        */
+    var t = window.location.hash.slice(1);
+    domUpdateTitle('Special/Search');
 
-        jget('FILES', function(data) {
-          var afiles = data.split('\n');
-          var files = [];
-          afiles.forEach(function(file) {
-            if (RegExp(t.toLowerCase()).test(file.toLowerCase())) {
-              files.push(file);
-            }
-          });
-          sresults.innerHTML = Mustache.render(document.getElementById('tp-results').innerHTML, {
-            query: t,
-            results: files
-          });
+    // Search page
+    domUpdateContent(Mustache.render(document.getElementById('tp-search').innerHTML));
+    updatePage();
+
+    var sform = document.getElementById('sform');
+    var ssubmit = document.getElementById('ssubmit');
+    var squery = document.getElementById('squery');
+    var sresults = document.getElementById('sresults');
+
+    // Update the search box's value
+    if (t != '') squery.value = t;
+
+    // Submition handler
+    function handleSubmit(ev) {
+      window.location.replace('?Special/Search#'+squery.value);
+      window.location.reload();
+      ev.preventDefault();
+      return false;
+    }
+
+    // Handlers
+    sform.addEventListener('submit', handleSubmit, false);
+    ssubmit.addEventListener('click', handleSubmit, false);
+
+    if (t != '') {
+      // Results page
+      /*
+      jget('https://api.github.com/repos/carverh/wiki/contents/pages', function(data) {
+        var dato = JSON.parse(data);
+        var rfiles = ghGetFiles('/');
+        cel.innerHTML = Mustache.render(document.getElementById('tp-results').innerHTML, {
+          query: rquery,
+          results: rfiles
         });
-      }
-      requireRemaining();
-    });
+      });
+      */
+
+      jget('FILES', function(data) {
+        var afiles = data.split('\n');
+        var files = [];
+        afiles.forEach(function(file) {
+          if (RegExp(t.toLowerCase()).test(file.toLowerCase())) {
+            files.push(file);
+          }
+        });
+        sresults.innerHTML = Mustache.render(document.getElementById('tp-results').innerHTML, {
+          query: t,
+          results: files
+        });
+      });
+    }
+    requireRemaining();
   },
   Listing: function() {
-    require(['lib/mustache/mustache.js'], function(Mustache) {
-      domUpdateTitle('Special/Listing');
-      jget('FILES', function(data) {
-        var files = data.split('\n');
-        domUpdateContent(Mustache.render(document.getElementById('tp-listing').innerHTML, {
-          results: files
-        })); 
-      });
+    domUpdateTitle('Special/Listing');
+    jget('FILES', function(data) {
+      var files = data.split('\n');
+      domUpdateContent(Mustache.render(document.getElementById('tp-listing').innerHTML, {
+        results: files
+      })); 
     });
     updatePage();
     requireRemaining();
