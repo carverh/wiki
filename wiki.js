@@ -22,8 +22,9 @@ var pagedata = {
   title: "",
   content: "",
   author: "",
-  enableEditing: true
-}
+  enableEditing: true,
+  editIsNew: false
+};
 
 // AJAX - Get XMLHTTP object
 function jobj() {
@@ -225,6 +226,7 @@ window.addEventListener("load", function() {
         console.log("Done loading wiki page '"+ptitle+"'.");
       }, function() {
         // Not Found
+        pagedata.editIsNew = true;
         domUpdateContent(Mustache.render(document.getElementById("tp-notfound").innerHTML, pagedata));
         updatePage();
       });
