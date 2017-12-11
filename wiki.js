@@ -7,6 +7,11 @@
 @file Javascript for DorpWiki
 */
 
+// Remove the "Enable Javascript" message
+document.getElementsByClassName('nojs').forEach(function(i) {
+  i.outerHTML = '';
+});
+
 // Globals
 var katex;
 
@@ -20,7 +25,7 @@ function jobj() {
       return new XMLHttpRequest();
    } else {
       // code for old IE browsers
-      return new ActiveXObject("Microsoft.XMLHTTP");
+      return new ActiveXObject('Microsoft.XMLHTTP');
   }
 }
 
@@ -77,13 +82,13 @@ function requireRemaining() {
 }
 
 function domUpdateTitle(title) {
-  document.querySelectorAll('[data-bind="title"]').forEach(function (i) {
+  document.querySelectorAll('[data-bind="title"]').forEach(function(i){
     i.innerHTML = title;
   });
 }
 
 function domUpdateContent(content) {
-  document.querySelectorAll('[data-bind="content"]').forEach(function (i) {
+  document.querySelectorAll('[data-bind="content"]').forEach(function(i){
     i.innerText = content;
   });
 }
