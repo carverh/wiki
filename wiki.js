@@ -179,6 +179,10 @@ window.addEventListener("load", function() {
       config[kv[0]] = kv[1];
     });
 
+    // Update pagedata
+    pagedata.repo = config.repo;
+    pagedata.author = config.author;
+    
     // Get wiki title
     var ptitle;
     if (window.location.href.split('?').length > 1) {
