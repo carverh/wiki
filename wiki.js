@@ -162,9 +162,9 @@ var specialPages = {
       domUpdateContent(Mustache.render(document.getElementById('tp-listing').innerHTML, {
         results: files
       })); 
+      updatePage();
+      requireRemaining();
     });
-    updatePage();
-    requireRemaining();
   }
 };
 
