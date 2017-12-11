@@ -52,10 +52,13 @@
          -->
       <article id="layout" aria-label="Wiki Article" aria-role="article">
          <header aria-label="Page Header">
-            <h1 id="title" aria-label="Page Title" aria-role="heading"></h1>
+            <h1 aria-label="Page Title" aria-role="heading" id="title">
+               <slot data-bind="title"></slot>
+            </h1>
             <hr>
          </header>
          <main id="content" aria-role="main">
+            <slot data-bind="content"></slot>
             <p class="nojs">
                Content should load here in a second.
                If it doesn't, refresh the page and check the URL.
