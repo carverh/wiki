@@ -24,11 +24,6 @@ var pagedata = {
   author: ""
 }
 
-// Require Mustache
-require(["lib/mustache/mustache.js"], function(Mustache) {
-  window.Mustache = Mustache;
-});
-
 // AJAX - Get XMLHTTP object
 function jobj() {
   if (window.XMLHttpRequest) {
@@ -73,23 +68,15 @@ function ghGetFiles(path) {
 
 // Requires all libraries that are loaded after the page is loaded
 function requireRemaining() {
-  require(['https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js', 'lib/katex/autoload.js', 'lib/prefixfree/prefixfree.js'], function(_katex, renderMathInElement, PrefixFree) {
-    // Setup KaTeX
-    // HACK: Set katex to _katex to define katex
-    katex = _katex;
-    renderMathInElement(document.body, { delimiters: [
-      {left: "$$", right: "$$", display: true},
-      {left: "$", right: "$", display: false}
-    ]});
-  });
+  // Setup KaTeX
+  // HACK: Set katex to _katex to define katex
+  renderMathInElement(document.body, { delimiters: [
+    {left: "$$", right: "$$", display: true},
+    {left: "$", right: "$", display: false}
+  ]});
 
   // Setup Highlight.js
-  require(['https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js'], function(hljs) {
-    hljs.initHighlighting();
-  });
-
-  // Setup Hypothesis
-  require(['https://hypothes.is/embed.js']);
+  hljs.initHighlighting();
 }
 
 function domUpdateTitle(title) {
@@ -206,23 +193,21 @@ jget('CONFIG', function(data) {
   } else {
     // Load wiki page
     jget('pages/'+ptitle+'.md', function(pbody) {
-      require(['lib/marked/marked.js'], function(marked) {
-        // Convert the markdown to HTML
-        var pbodym = marked(pbody);
+      // Convert the markdown to HTML
+      var pbodym = marked(pbody);
 
-        // Fill slots
-        domUpdateTitle(ptitle);
-        domUpdateContent(pbodym);
+      // Fill slots
+      domUpdateTitle(ptitle);
+      domUpdateContent(pbodym);
 
-        // Render page
-        updatePage();
-        
-        // Require the rest of the libraries
-        requireRemaining();
+      // Render page
+      updatePage();
 
-        // Log success message to console
-        console.log("Done loading wiki page '"+ptitle+"'.");
-      });
+      // Require the rest of the libraries
+      requireRemaining();
+
+      // Log success message to console
+      console.log("Done loading wiki page '"+ptitle+"'.");
     });
   }
 });
