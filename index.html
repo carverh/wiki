@@ -12,6 +12,7 @@
       <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.8.3/katex.min.js"></script>
       <script src="lib/katex/autoload.js"></script>
+      <script async defer src="https://buttons.github.io/buttons.js"></script>
       <script src="wiki.js"></script>
       <script type="application/json" class="js-hypothesis-config">{"showHighlights": false}</script>
       
@@ -49,7 +50,7 @@
             <div id="header-buttons">
                <a class="button" href="?Home">Home</a>
                {{#enableEditing}}
-                  <a class="button" href="{{repo}}/edit/master/pages/{{title}}.md">Edit</a>
+                  <a class="button" href="https://github.com/{{repo}}/edit/master/pages/{{title}}.md">Edit</a>
                {{/enableEditing}}
             </div>
             <hr>
@@ -59,6 +60,11 @@
          </main>
          <footer>
             <p>Copyright &copy; 2017 {{author}}</p>
+            <div>
+               <a class="github-button" href="https://github.com/{{repo}}/fork" data-icon="octicon-repo-forked" data-show-count="true" aria-label="Fork {{repo}} on GitHub">Fork</a>
+               <a class="github-button" href="https://github.com/{{repo}}" data-icon="octicon-star" data-show-count="true" aria-label="Star {{repo}} on GitHub">Star</a>
+               <a class="github-button" href="https://github.com/{{repo}}/issues" data-icon="octicon-issue-opened" data-show-count="true" aria-label="Issue {{repo}} on GitHub">Issue</a>
+            </div>
          </footer>
       </template>
    </head>
