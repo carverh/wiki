@@ -47,7 +47,9 @@
          <header>
             <h1>{{title}}</h1>
             <div class="heading-right">
-               <a class="button" href="{{repo}}/edit/master/pages/{{title}}.md">Edit</a>
+               {{#enableEditing}}
+                  <a class="button" href="{{repo}}/edit/master/pages/{{title}}.md">Edit</a>
+               {{/enableEditing}}
             </div>
             <hr>
          </header>
