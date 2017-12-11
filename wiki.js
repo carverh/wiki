@@ -110,7 +110,7 @@ function updatePage() {
   // Fetch templates
   document.querySelectorAll('ut').forEach(function(i) {
     var tpt = i.getAttribute('template');
-    i.outerHTML = Mustache.render(templates[tpt], {attrs: tpt.attributes, page: pagedata});
+    i.outerHTML = Mustache.render(templates[tpt], {el: i, page: pagedata});
   });
 }
 
