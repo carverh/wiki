@@ -1,1 +1,1 @@
-**Git** is a [VersionManagementSystem](?VersionManagementSystem) created by [LinusTorovalds](?LinusTorovalds).
+**Git** is a [VersionManagementSystem](?VersionManagementSystem) created by [LinusTorvalds](?LinusTorvalds).
