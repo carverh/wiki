@@ -115,12 +115,12 @@ function updatePage() {
 }
 
 function pageNotFound() {
+  pagedata.editIsNew = true;
   domUpdateContent(Mustache.render(document.getElementById("tp-notfound").innerHTML, pagedata));
   updatePage();
 }
 
 function pageNotFoundSpecial() {
-  pagedata.editIsNew = true;
   domUpdateContent(Mustache.render(document.getElementById("tp-notfound").innerHTML, pagedata));
   updatePage();
 }
