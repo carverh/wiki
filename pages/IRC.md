@@ -1,2 +1,2 @@
 **Internet Relay Chat** is a [TCP](?TCP) chat protocol.
-<ut type="stub" />
+<ut type="stub"></ut>
