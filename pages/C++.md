@@ -1,4 +1,4 @@
-**CPP** is a extention of [C](?C). One of its main improvements is that it has [Classes](?Classes)
+**C++** is a extention of [C](?C). One of its main improvements is that it has [Classes](?Classes)
 
 ## Examples
 ### Hello World
